@@ -109,17 +109,21 @@ public class ListMockTest {
         System.out.println(arrayListMock.size());//5
     }
 
+    // note:
+    // 1- A mock does not retain behaviour(code) of the original class
+    // 2- spy, by default, retains behaviour(code) of the original class
+    // 3- you can stub(override) and verify specific behavior (methods) on the spy.
     @Test
     public void spying() {
         ArrayList arrayListSpy = spy(ArrayList.class);
         arrayListSpy.add("Test0");
-        System.out.println(arrayListSpy.get(0));//Test0
+        System.out.println(arrayListSpy.get(0));//Test0 , note: if you do not specify add so you will get exception
         System.out.println(arrayListSpy.size());//1
         arrayListSpy.add("Test");
         arrayListSpy.add("Test2");
         System.out.println(arrayListSpy.size());//3
 
-        when(arrayListSpy.size()).thenReturn(5);
+        when(arrayListSpy.size()).thenReturn(5);// note : from here to after lines, it always return 5
         System.out.println(arrayListSpy.size());//5
 
         arrayListSpy.add("Test4");
